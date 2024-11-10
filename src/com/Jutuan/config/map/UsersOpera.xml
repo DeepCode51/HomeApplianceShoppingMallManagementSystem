@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="UsersOpera">
+  <!-- 
+  		Bean.Users对应的resultMap
+   -->
+	<resultMap type="com.Jutuan.bean.Users" id="UsersMap">
+		<!-- column为数据库中的字段名   
+			 jdbcType(数据库中的字段类型与jdbcType之间有转换关系)为该字段在数据库中的类型 
+			 property为对象中的属性名(bean中) -->
+	    <id column="USERNMAE" jdbcType="VARCHAR" property="username"/>
+	    <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+	    <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+	    <result column="NAME" jdbcType="VARCHAR" property="name"/>
+	    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone"/>
+	    <result column="SEX" jdbcType="VARCHAR" property="sex"/>
+	    <result column="BIRTHDAY" jdbcType="VARCHAR" property="birthday"/>	    
+	    <result column="ROLE" jdbcType="INTEGER" property="role"/>
+	     <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+  </resultMap>
+  
+  <!-- 
+  		登录验证
+   -->
+	<select id="CheckUser" parameterType="com.Jutuan.bean.Users" resultType="int">
+		SELECT COUNT(USERNAME) FROM users WHERE USERNAME=#{username} AND PASSWORD=#{password}
+	</select>
+	 <!-- 
+  		注册验证
+   -->
+	<select id="CheckRegister" parameterType="com.Jutuan.bean.Users" resultType="int">
+		SELECT COUNT(USERNAME) FROM users WHERE USERNAME=#{username} 
+	</select>
+	<!-- 
+  		获取用户名和权限
+   -->
+	<select id="GetUserName" parameterType="String" resultMap="UsersMap">
+		SELECT NAME, ROLE,ADDRESS FROM users WHERE USERNAME=#{username}
+	</select>
+	<!-- 
+		用户注册 
+	 -->
+	 <insert id="userinsert" parameterType="com.Jutuan.bean.Users" useGeneratedKeys="false">
+    INSERT INTO users
+    ( USERNAME,
+    PASSWORD,
+    EMAIL,
+    NAME,
+    TELEPHONE,
+    SEX,
+    BIRTHDAY,
+    ROLE
+    )
+    VALUES
+    ( #{username},
+    #{password},
+    #{email},
+    #{name},
+    #{telephone},
+    #{sex},
+    #{birthday},
+    #{role}
+    )
+  </insert>
+   
+  <update id="updateAddress" parameterType="com.Jutuan.bean.Users" >
+  update users set address=#{address} where username=#{username} 
+  </update>
+ 
+</mapper>

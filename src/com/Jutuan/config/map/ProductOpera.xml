@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ProductOpera">
+  <!-- 
+  		Bean.Product对应的resultMap
+   -->
+	<resultMap type="com.Jutuan.bean.Product" id="ProductMap">
+		<!-- column为数据库中的字段名   
+			 jdbcType(数据库中的字段类型与jdbcType之间有转换关系)为该字段在数据库中的类型 
+			 property为对象中的属性名(bean中) -->
+	    <id column="PID" jdbcType="VARCHAR" property="pid"/>
+	    <result column="PNAME" jdbcType="VARCHAR" property="pname"/>
+	    <result column="MARKET_PRICE" jdbcType="DOUBLE" property="market_price"/>
+	    <result column="SHOP_PRICE" jdbcType="DOUBLE" property="shop_price"/>
+	    <result column="PIMAGE" jdbcType="VARCHAR" property="pimage"/>
+	    <result column="PDATE" jdbcType="DATE" property="pdate"/>
+	    <result column="IS_NEW" jdbcType="INTEGER" property="is_new"/>	    
+	    <result column="PDESC" jdbcType="VARCHAR" property="pdesc"/>
+	    <result column="PFLAG" jdbcType="INTEGER" property="pflag"/>
+	    	    <result column="SUMMARY" jdbcType="VARCHAR" property="summary"/>	    
+	    <result column="CHARACTERISTICS" jdbcType="VARCHAR" property="characteristics"/>
+	    <result column="DELIVERY_TIME" jdbcType="VARCHAR" property="delivery_time"/>
+	    
+  </resultMap>
+  
+  <!-- 
+  		获取最新商品
+   -->
+	<select id="FindNewProduct" parameterType="com.Jutuan.bean.Product" resultMap="ProductMap">
+		
+	</select>
+	<!-- 
+  		获取过期商品
+   -->
+	<select id="FindYestodayProduct" parameterType="com.Jutuan.bean.Product" resultMap="ProductMap">
+		
+	</select>
+	
+	
+	
+	<select id="queryAll"  resultMap="ProductMap">
+		select * from product;
+	</select>
+	
+	
+	
+	<insert id="save">
+	
+	insert into product values(
+	#{pid},#{summary},#{pname},#{market_price},#{shop_price},#{pimage},#{pdate},	#{is_new},	#{pdesc},	#{pflag},#{characteristics},	#{delivery_time},#{count}
+	);
+
+	
+	</insert>
+	 
+	<update id="decreaseCount">
+	
+	update product set count=#{count} where pid=#{pid};  
+	
+	</update>
+
+
+    <select id="getProductById"  resultMap="ProductMap">
+
+        select * from product where pid=#{pid};
+
+    </select>
+
+	<update id="del">    
+	
+	delete from  product where pid=#{pid};  
+	
+	</update>
+	
+</mapper>

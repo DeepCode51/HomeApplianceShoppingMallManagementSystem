@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+A {
+    text-decoration: NONE
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.H {
+    width: 800px;
+    padding-top: 2px;
+    margin-left: 600px;
+}
+
+.H div {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.H div .i {
+    margin-top: 0px;
+    padding-top: 0px;
+    display: block;
+    float: right;
+}
+
+.H input {
+    text-align: left;
+    border: 1px solid #000000
+}
+
+.bk {
+    width: 700px;
+    margin-top: 300px;
+    margin-left: 10px;
+    border: 2px solid #000000;
+}
+
+.zh,
+.mm {
+    width: 350px;
+    height: 30px;
+}
+
+.fx {
+    margin-left: 30px;
+}
+
+.H div .an {
+    width: 350px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+    background: #3fa8c8;
+    border-radius: 10px;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.an:hover {
+    background: #49bde0;
+}
+
+.zc a {
+    margin-left: 500px;
+    color: #000;
+}
+
+.zc a:hover {
+    color: #49bde0;
+}
